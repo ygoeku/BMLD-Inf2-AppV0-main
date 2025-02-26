@@ -13,5 +13,5 @@ Diese App wurde von folgenden Personen entwickelt:
 
 Diese App ist das leere Gerüst für die App-Entwicklung im Modul Informatik 2 (BMLD/ZHAW)
 
-Autor: Samuel Wehrli (wehs@zhaw.ch)
+Autorinnen - Yasemin Gökuguz (goekuyas@students.zhaw.ch) und Elena Avkova (avkovele@students.zhaw.ch)
 """
