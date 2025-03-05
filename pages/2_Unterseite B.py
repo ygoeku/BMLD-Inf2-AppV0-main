@@ -5,20 +5,21 @@ st.title("Unterseite B")
 st.write("Diese Seite ist eine Unterseite der Startseite.")
 
 st.title("MCH Berechnung")
-
 hgb = st.number_input("Hämoglobin (g/dl):", min_value=0.0, step=0.1)
-hkt = st.number_input("Hämatokrit (%):", min_value=0.0, step=0.1)
+erythrozyten = st.number_input("Erythrozytenanzahl (Millionen/µl):", min_value=0.0, step=0.1)
 
-# Debugging: Check the input values
-st.write(f"Hämoglobin (hgb): {hgb}")
-st.write(f"Hämatokrit (hkt): {hkt}")
+# Auswahlfeld für das Geschlecht
+geschlecht = st.selectbox("Geschlecht:", ["Wählen Sie aus", "Männlich", "Weiblich"])
 
-# Ensure values are greater than 0 and valid
-if hgb > 0 and hkt > 0:
-    mch = (hgb / hkt) * 10
+# Berechnung des MCH, wenn alle Eingaben gültig sind
+if hgb > 0 and erythrozyten > 0 and geschlecht != "Wählen Sie aus":
+    mch = (hgb / erythrozyten) * 10
     st.write(f"Der MCH-Wert beträgt: {mch:.2f} pg")
-else:
-    if hgb == 0 or hkt == 0:
-        st.write("Bitte geben Sie gültige Werte für Hämoglobin und Hämatokrit ein, die größer als 0 sind.")
+    
+    # Geschlechtsspezifische Hinweise für den MCH-Wert
+    if geschlecht == "Männlich":
+        st.write("Für Männer liegt der normale MCH-Wert typischerweise zwischen 27 und 33 pg.")
     else:
-        st.write("Bitte geben Sie gültige Werte für Hämoglobin und Hämatokrit ein.")
+        st.write("Für Frauen liegt der normale MCH-Wert typischerweise zwischen 27 und 33 pg.")
+else:
+    st.write("Bitte geben Sie gültige Werte für Hämoglobin, Erythrozytenanzahl und Geschlecht ein.")
