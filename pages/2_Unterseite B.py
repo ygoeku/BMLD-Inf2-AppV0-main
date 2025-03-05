@@ -36,3 +36,10 @@ if hgb > 0 and erythrozyten > 0 and geschlecht != "Wählen Sie aus":
             st.write("Der MCH-Wert liegt nicht im Referenzbereich für Frauen.")
 else:
     st.write("Bitte geben Sie gültige Werte für Hämoglobin, Erythrozytenanzahl und Geschlecht ein.")
+
+haematokrit = st.slider('Wählen Sie den Hämatokritwert (in %):', 
+                        min_value=0.0, 
+                        max_value=100.0, 
+                        value=45.0, 
+                        step=0.1)
+st.write('Der ausgewählte Hämatokritwert ist:', haematokrit, '%')
