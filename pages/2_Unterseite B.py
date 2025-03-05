@@ -2,17 +2,15 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-st.title("Unterseite B")
-
-st.write("Diese Seite ist eine Unterseite der Startseite.")
-
+# Titel
 st.title("MCH und Hämatokrit Berechnung mit Punktdiagramm")
 
 # Abfrage des Geschlechts
-geschlecht = st.selectbox("Geschlecht:", ["Wählen Sie aus", "Männlich", "Weiblich"])
+geschlecht = st.selectbox("Wählen Sie Ihr Geschlecht:", ["Wählen Sie aus", "Männlich", "Weiblich"])
 
-# Eingabefelder für Hämoglobin (g/dl) und Erythrozytenanzahl (Millionen/µl)
+# Nur wenn das Geschlecht ausgewählt ist, sollen die Eingabefelder angezeigt werden
 if geschlecht != "Wählen Sie aus":
+    # Eingabefelder für Hämoglobin (g/dl) und Erythrozytenanzahl (Millionen/µl)
     hgb = st.number_input("Hämoglobin (g/dl):", min_value=0.0, step=0.1)
     erythrozyten = st.number_input("Erythrozytenanzahl (Millionen/µl):", min_value=0.0, step=0.1)
 
