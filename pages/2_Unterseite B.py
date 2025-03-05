@@ -1,8 +1,7 @@
 import streamlit as st
-import pandas as pd
 
 # Titel
-st.title("MCH und Hämatokrit Berechnung mit Tabelle")
+st.title("MCH und Hämatokrit Berechnung")
 
 # Abfrage des Geschlechts
 geschlecht = st.selectbox("Geschlecht:", ["Wählen Sie aus", "Männlich", "Weiblich"])
@@ -20,10 +19,16 @@ if geschlecht != "Wählen Sie aus":
         # Geschlechtsspezifische Hinweise für den MCH-Wert
         if geschlecht == "Männlich":
             st.write("Für Männer liegt der normale MCH-Wert typischerweise zwischen 27.5 und 33 pg.")
-            mch_check = "Im Referenzbereich" if 27.5 <= mch <= 33 else "Nicht im Referenzbereich"
+            if 27.5 <= mch <= 33:
+                st.write("Der MCH-Wert liegt im Referenzbereich für Männer.")
+            else:
+                st.write("Der MCH-Wert liegt nicht im Referenzbereich für Männer.")
         else:
             st.write("Für Frauen liegt der normale MCH-Wert typischerweise zwischen 26 und 32.5 pg.")
-            mch_check = "Im Referenzbereich" if 26 <= mch <= 32.5 else "Nicht im Referenzbereich"
+            if 26 <= mch <= 32.5:
+                st.write("Der MCH-Wert liegt im Referenzbereich für Frauen.")
+            else:
+                st.write("Der MCH-Wert liegt nicht im Referenzbereich für Frauen.")
     
     else:
         st.write("Bitte geben Sie gültige Werte für Hämoglobin und Erythrozytenanzahl ein.")
@@ -38,22 +43,15 @@ if geschlecht != "Wählen Sie aus":
 
     # Geschlechtsspezifische Hinweise für den Hämatokritwert
     if geschlecht == "Männlich":
-        haematokrit_check = "Im Referenzbereich" if 40 <= haematokrit <= 53 else "Nicht im Referenzbereich"
+        if 40 <= haematokrit <= 53:
+            st.write("Der Hämatokritwert liegt im normalen Bereich für Männer.")
+        else:
+            st.write("Der Hämatokritwert liegt nicht im normalen Bereich für Männer.")
     else:
-        haematokrit_check = "Im Referenzbereich" if 35 <= haematokrit <= 47 else "Nicht im Referenzbereich"
-
-    # Erstellen der Tabelle mit den Schlusswerten
-    data = {
-        "Parameter": ["MCH (pg)", "Hämatokrit (%)"],
-        "Wert": [f"{mch:.2f}", f"{haematokrit:.1f}"],
-        "Status": [mch_check, haematokrit_check]
-    }
-
-    df = pd.DataFrame(data)
-    
-    # Anzeige der Tabelle
-    st.dataframe(df)
-
+        if 35 <= haematokrit <= 47:
+            st.write("Der Hämatokritwert liegt im normalen Bereich für Frauen.")
+        else:
+            st.write("Der Hämatokritwert liegt nicht im normalen Bereich für Frauen.")
 else:
     st.write("Bitte wählen Sie ein Geschlecht aus.")
 
