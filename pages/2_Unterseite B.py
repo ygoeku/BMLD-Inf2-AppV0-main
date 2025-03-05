@@ -6,7 +6,7 @@ import pytz
 st.title("🩺 MCH und Hämatokrit Berechnung")
 
 # Zeitzone und aktuelle Uhrzeit berechnen
-timezone = 'Europe/Berlin'  # Beispiel: Setze die Zeitzone auf Berlin
+timezone = 'Europe/Zurich'  # Beispiel: Setze die Zeitzone auf Berlin
 tz = pytz.timezone(timezone)
 now = datetime.datetime.now(tz).strftime('%d.%m.%Y %H:%M:%S')
 st.markdown(f"**Aktuelle Uhrzeit (in {timezone}):** {now} ⏰", unsafe_allow_html=True)
@@ -32,10 +32,10 @@ if geschlecht != "Wählen Sie aus":
             st.markdown("<p style='color:magenta;'>Für Frauen liegt der normale MCH-Wert typischerweise zwischen 26 und 32.5 pg.</p>", unsafe_allow_html=True)
     
     else:
-        st.markdown("<p style='color:red;'>❌ Bitte geben Sie gültige Werte für Hämoglobin und Erythrozytenanzahl ein.</p>", unsafe_allow_html=True)
+        st.markdown("<p style='color:red;'> Bitte geben Sie gültige Werte für Hämoglobin und Erythrozytenanzahl ein.</p>", unsafe_allow_html=True)
 
     # Eingabefeld für den Hämatokritwert
-    haematokrit = st.slider('💉 Wählen Sie den Hämatokritwert (in %):', 
+    haematokrit = st.slider('Wählen Sie den Hämatokritwert (in %):', 
                             min_value=0.0, 
                             max_value=100.0, 
                             value=45.0, 
