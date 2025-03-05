@@ -18,8 +18,8 @@ if hgb > 0 and erythrozyten > 0 and geschlecht != "Wählen Sie aus":
     
     # Geschlechtsspezifische Hinweise für den MCH-Wert
     if geschlecht == "Männlich":
-        st.write("Für Männer liegt der normale MCH-Wert typischerweise zwischen 27 und 33 pg.")
+        st.write("Für Männer liegt der normale MCH-Wert typischerweise zwischen 27.5 und 33 pg.")
     else:
-        st.write("Für Frauen liegt der normale MCH-Wert typischerweise zwischen 27 und 33 pg.")
+        st.write("Für Frauen liegt der normale MCH-Wert typischerweise zwischen 26 und 32.5 pg.")
 else:
     st.write("Bitte geben Sie gültige Werte für Hämoglobin, Erythrozytenanzahl und Geschlecht ein.")
