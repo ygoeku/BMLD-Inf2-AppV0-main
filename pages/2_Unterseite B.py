@@ -50,17 +50,21 @@ if geschlecht != "Wählen Sie aus":
     else:
         haematokrit_check = "Im Referenzbereich" if 35 <= haematokrit <= 47 else "Nicht im Referenzbereich"
 
-    # Erstellen der Tabelle mit den Schlusswerten
-    data = {
-        "Parameter": ["MCH (pg)", "Hämatokrit (%)"],
-        "Wert": [f"{mch:.2f}", f"{haematokrit:.1f}"],
-        "Status": [mch_check, haematokrit_check]
-    }
+    # Überprüfen, ob alle Variablen gesetzt sind, bevor DataFrame erstellt wird
+    if mch_check and haematokrit_check:
+        # Erstellen der Tabelle mit den Schlusswerten
+        data = {
+            "Parameter": ["MCH (pg)", "Hämatokrit (%)"],
+            "Wert": [f"{mch:.2f}", f"{haematokrit:.1f}"],
+            "Status": [mch_check, haematokrit_check]
+        }
 
-    df = pd.DataFrame(data)
-    
-    # Anzeige der Tabelle
-    st.dataframe(df)
+        df = pd.DataFrame(data)
+        
+        # Anzeige der Tabelle
+        st.dataframe(df)
+    else:
+        st.write("Es gab ein Problem mit den Eingabewerten.")
 
 else:
     st.write("Bitte wählen Sie ein Geschlecht aus.")
