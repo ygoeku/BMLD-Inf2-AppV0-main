@@ -4,16 +4,10 @@ st.title("Unterseite B")
 
 st.write("Diese Seite ist eine Unterseite der Startseite.")
 
-st.title("MCH und Hämatokrit Berechnung mit Tabelle")
+st.title("MCH und Hämatokrit Berechnung mit Punktdiagramm")
 
 # Abfrage des Geschlechts
 geschlecht = st.selectbox("Geschlecht:", ["Wählen Sie aus", "Männlich", "Weiblich"])
-
-# Initialisierung der Variablen
-mch_check = ""
-haematokrit_check = ""
-mch = 0.0
-haematokrit = 0.0
 
 # Eingabefelder für Hämoglobin (g/dl) und Erythrozytenanzahl (Millionen/µl)
 if geschlecht != "Wählen Sie aus":
@@ -22,16 +16,14 @@ if geschlecht != "Wählen Sie aus":
 
     # Berechnung des MCH, wenn alle Eingaben gültig sind
     if hgb > 0 and erythrozyten > 0:
-        mch = (hgb / erythrozyten) * 10
+        mch = (hgb / erythrozyten) * 10  # Berechnung des MCH-Werts
         st.write(f"Der MCH-Wert beträgt: {mch:.2f} pg")
         
         # Geschlechtsspezifische Hinweise für den MCH-Wert
         if geschlecht == "Männlich":
             st.write("Für Männer liegt der normale MCH-Wert typischerweise zwischen 27.5 und 33 pg.")
-            mch_check = "Im Referenzbereich" if 27.5 <= mch <= 33 else "Nicht im Referenzbereich"
         else:
             st.write("Für Frauen liegt der normale MCH-Wert typischerweise zwischen 26 und 32.5 pg.")
-            mch_check = "Im Referenzbereich" if 26 <= mch <= 32.5 else "Nicht im Referenzbereich"
     
     else:
         st.write("Bitte geben Sie gültige Werte für Hämoglobin und Erythrozytenanzahl ein.")
@@ -44,27 +36,40 @@ if geschlecht != "Wählen Sie aus":
                             step=0.1)
     st.write('Der ausgewählte Hämatokritwert ist:', haematokrit, '%')
 
-    # Geschlechtsspezifische Hinweise für den Hämatokritwert
+    # Plot erstellen
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    # Erstellen der x-Achsenwerte für MCH und Hämatokrit
+    parameter = ['MCH (pg)', 'Hämatokrit (%)']
+    values = [mch, haematokrit]
+
+    # Erstellen der Vergleichslinien für die Referenzwerte
     if geschlecht == "Männlich":
-        haematokrit_check = "Im Referenzbereich" if 40 <= haematokrit <= 53 else "Nicht im Referenzbereich"
+        # Männer Referenzbereich: MCH 27.5-33 pg, Hämatokrit 40-53 %
+        ax.plot([0, 1], [27.5, 27.5], label="Männlicher MCH-Referenzbereich", color="blue", linestyle="--")
+        ax.plot([0, 1], [33, 33], label="Männlicher MCH-Referenzbereich", color="blue", linestyle="--")
+        ax.plot([0, 1], [40, 40], label="Männlicher Hämatokrit-Referenzbereich", color="green", linestyle="--")
+        ax.plot([0, 1], [53, 53], label="Männlicher Hämatokrit-Referenzbereich", color="green", linestyle="--")
     else:
-        haematokrit_check = "Im Referenzbereich" if 35 <= haematokrit <= 47 else "Nicht im Referenzbereich"
+        # Frauen Referenzbereich: MCH 26-32.5 pg, Hämatokrit 35-47 %
+        ax.plot([0, 1], [26, 26], label="Weiblicher MCH-Referenzbereich", color="blue", linestyle="--")
+        ax.plot([0, 1], [32.5, 32.5], label="Weiblicher MCH-Referenzbereich", color="blue", linestyle="--")
+        ax.plot([0, 1], [35, 35], label="Weiblicher Hämatokrit-Referenzbereich", color="green", linestyle="--")
+        ax.plot([0, 1], [47, 47], label="Weiblicher Hämatokrit-Referenzbereich", color="green", linestyle="--")
 
-    # Überprüfen, ob alle Variablen gesetzt sind, bevor DataFrame erstellt wird
-    if mch_check and haematokrit_check:
-        # Erstellen der Tabelle mit den Schlusswerten
-        data = {
-            "Parameter": ["MCH (pg)", "Hämatokrit (%)"],
-            "Wert": [f"{mch:.2f}", f"{haematokrit:.1f}"],
-            "Status": [mch_check, haematokrit_check]
-        }
+    # Punkte für den MCH- und Hämatokritwert des Benutzers
+    ax.scatter(0, mch, color='red', label=f'Ihr MCH-Wert ({mch:.2f} pg)', zorder=5)
+    ax.scatter(1, haematokrit, color='orange', label=f'Ihr Hämatokritwert ({haematokrit:.1f}%)', zorder=5)
 
-        df = pd.DataFrame(data)
-        
-        # Anzeige der Tabelle
-        st.dataframe(df)
-    else:
-        st.write("Es gab ein Problem mit den Eingabewerten.")
+    # Anpassen der Achsen und Labels
+    ax.set_xticks([0, 1])
+    ax.set_xticklabels(['MCH (pg)', 'Hämatokrit (%)'])
+    ax.set_ylabel('Wert')
+    ax.set_title('Vergleich von MCH und Hämatokrit mit Referenzbereichen')
+    ax.legend()
+
+    # Anzeige des Diagramms in Streamlit
+    st.pyplot(fig)
 
 else:
     st.write("Bitte wählen Sie ein Geschlecht aus.")
