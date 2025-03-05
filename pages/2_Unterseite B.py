@@ -25,14 +25,14 @@ if hgb > 0 and erythrozyten > 0:
 
     # Geschlechtsspezifische Hinweise für den MCH-Wert
     if geschlecht == "Männlich":
-        st.write("<p style='color:blue;'>Für Männer liegt der normale MCH-Wert typischerweise zwischen 27.5 und 33 pg.</p>", unsafe_allow_html=True)
+        st.write("<p style='color:black;'>Für Männer liegt der normale MCH-Wert typischerweise zwischen 27.5 und 33 pg.</p>", unsafe_allow_html=True)
         # Überprüfung, ob der MCH-Wert im Referenzbereich für Männer liegt
         if 27.5 <= mch <= 33:
             st.write("<p style='color:green;'>✅ Der MCH-Wert liegt im Referenzbereich für Männer (27.5 - 33 pg).</p>", unsafe_allow_html=True)
         else:
             st.write("<p style='color:red;'>❌ Der MCH-Wert liegt NICHT im Referenzbereich für Männer (27.5 - 33 pg).</p>", unsafe_allow_html=True)
     elif geschlecht == "Weiblich":
-        st.write("<p style='color:magenta;'>Für Frauen liegt der normale MCH-Wert typischerweise zwischen 26 und 32.5 pg.</p>", unsafe_allow_html=True)
+        st.write("<p style='color:black;'>Für Frauen liegt der normale MCH-Wert typischerweise zwischen 26 und 32.5 pg.</p>", unsafe_allow_html=True)
         # Überprüfung, ob der MCH-Wert im Referenzbereich für Frauen liegt
         if 26 <= mch <= 32.5:
             st.write("<p style='color:green;'>✅ Der MCH-Wert liegt im Referenzbereich für Frauen (26 - 32.5 pg).</p>", unsafe_allow_html=True)
