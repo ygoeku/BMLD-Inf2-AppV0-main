@@ -15,4 +15,3 @@ Diese App ist das leere Gerüst für die App-Entwicklung im Modul Informatik 2 (
 
 Autorinnen - Yasemin Gökuguz (goekuyas@students.zhaw.ch) und Elena Avkova (avkovele@students.zhaw.ch)
 """
-
