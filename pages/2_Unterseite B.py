@@ -9,6 +9,12 @@ st.title("MCH und Hämatokrit Berechnung mit Tabelle")
 # Abfrage des Geschlechts
 geschlecht = st.selectbox("Geschlecht:", ["Wählen Sie aus", "Männlich", "Weiblich"])
 
+# Initialisierung der Variablen
+mch_check = ""
+haematokrit_check = ""
+mch = 0.0
+haematokrit = 0.0
+
 # Eingabefelder für Hämoglobin (g/dl) und Erythrozytenanzahl (Millionen/µl)
 if geschlecht != "Wählen Sie aus":
     hgb = st.number_input("Hämoglobin (g/dl):", min_value=0.0, step=0.1)
