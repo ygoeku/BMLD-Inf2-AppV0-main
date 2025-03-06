@@ -18,4 +18,3 @@ Autorinnen - Yasemin Gökuguz (goekuyas@students.zhaw.ch) und Elena Avkova (avko
 
 
 
-
