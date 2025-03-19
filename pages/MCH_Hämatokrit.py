@@ -52,10 +52,10 @@ elif geschlecht == "Weiblich":
         st.write("<p style='color:red;'>❌ Der Hämatokritwert liegt NICHT im Referenzbereich für Frauen (35-47%).</p>", unsafe_allow_html=True)
 
 if hgb > 0 and erythrozyten > 0:
-    result =calculate_mch
-    st.write(f'**Der MCH ist:** {result["mch"]}')
-    st.write(f'**Berechnet am:** {result["timestamp"].strftime("%d.%m.%Y %H:%M:%S")}')
-    st.write(f'**Kategorie:** {result["category"]}')
+    result_dict =calculate_mch(hgb, erythrozyten)
+    st.write(f'**Der MCH ist:** {result_dict["mch"]}')
+    st.write(f'**Berechnet am:** {result_dict["timestamp"].strftime("%d.%m.%Y %H:%M:%S")}')
+    st.write(f'**Kategorie:** {result_dict["category"]}')
 
     from utils.data_manager import DataManager
     DataManager().append_record(session_state_key='data_df', record_dict=result)
