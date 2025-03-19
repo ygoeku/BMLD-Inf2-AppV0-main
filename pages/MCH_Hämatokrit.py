@@ -57,7 +57,7 @@ elif geschlecht == "Weiblich":
 
 
 import streamlit as st
-from functions.bmi_calculator import calculate_bmi
+from functions.mch_calculator import calculate_mch
 
 st.title('🩺 MCH Berechnung')
 
@@ -70,7 +70,7 @@ with st.form("MCH Eingabeformular"):
     submitted = st.form_submit_button("Submit")
     
 if submitted:
-    result = calculate_bmi(height, weight)
+    result = calculate_mch(height, weight)
     st.write(f'Ihr MCH ist: {result["mch"]}')
     st.write(f'Berechnet am: {result["timestamp"].strftime("%d.%m.%Y %H:%M:%S")}')
     st.write(f'Kategorie: {result["category"]}')
