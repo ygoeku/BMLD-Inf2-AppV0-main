@@ -52,14 +52,7 @@ elif geschlecht == "Weiblich":
         st.write("<p style='color:red;'>❌ Der Hämatokritwert liegt NICHT im Referenzbereich für Frauen (35-47%).</p>", unsafe_allow_html=True)
 
 if hgb > 0 and erythrozyten > 0:
-    result = {
-        'mch': mch,
-        'timestamp': datetime.datetime.now(tz),
-        'category': 'Normal' if (geschlecht == 'Männlich' and 27.5 <= mch <= 33) or (geschlecht == 'Weiblich' and 26 <= mch <= 32.5) else 'Abnormal',
-        'haematokrit': haematokrit,
-        'geschlecht': geschlecht
-    }
-
+    result =calculate_mch
     st.write(f'**Der MCH ist:** {result["mch"]}')
     st.write(f'**Berechnet am:** {result["timestamp"].strftime("%d.%m.%Y %H:%M:%S")}')
     st.write(f'**Kategorie:** {result["category"]}')
