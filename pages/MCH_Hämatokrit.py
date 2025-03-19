@@ -51,7 +51,8 @@ elif geschlecht == "Weiblich":
     else:
         st.write("<p style='color:red;'>❌ Der Hämatokritwert liegt NICHT im Referenzbereich für Frauen (35-47%).</p>", unsafe_allow_html=True)
 
-
+ from utils.data_manager import DataManager
+    DataManager().append_record(session_state_key='data_df', record_dict=result)  # update data in session state and storage
 
 
 
