@@ -1,3 +1,6 @@
+from utils.login_manager import LoginManager
+LoginManager().go_to_login('Start.py') 
+
 import streamlit as st
 
 st.title("Unterseite A")
