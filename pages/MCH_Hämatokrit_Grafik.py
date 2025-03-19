@@ -15,16 +15,16 @@ if data_df.empty:
     st.stop()
 
 # Weight over time
-st.line_chart(data=data_df.set_index('timestamp')['weight'], 
+st.line_chart(data=data_df.set_index('timestamp')['hgb'], 
                 use_container_width=True)
 st.caption('Hämoglobinwert über Zeit (g/dl)')
 
 # Height over time 
-st.line_chart(data=data_df.set_index('timestamp')['height'],
+st.line_chart(data=data_df.set_index('timestamp')['erythrozyten'],
                 use_container_width=True)
 st.caption('Erythrozytenanzahl über Zeit Millionen/μl')
 
 # BMI over time
-st.line_chart(data=data_df.set_index('timestamp')['bmi'],
+st.line_chart(data=data_df.set_index('timestamp')['mch'],
                 use_container_width=True)
 st.caption('MCH über Zeit')
