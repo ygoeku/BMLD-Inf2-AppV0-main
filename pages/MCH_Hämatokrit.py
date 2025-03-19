@@ -3,7 +3,7 @@ import datetime
 import pytz
 
 
-st.title("🩺 MCH und Hämatokrit Berechnung")
+st.title("🩺 MCH Berechnung")
 
 
 timezone = 'Europe/Zurich'  
@@ -56,5 +56,29 @@ elif geschlecht == "Weiblich":
     # DataManager().append_record(session_state_key='data_df', record_dict=)  # update data in session state and storage
 
 
+import streamlit as st
+from functions.bmi_calculator import calculate_bmi
 
+st.title('🩺 MCH Berechnung')
+
+with st.form("MCH Eingabeformular"):
+    # Get user input for height and weight
+    height = st.number_input('Geben Sie Ihren Hämoglobinwert ein (in g/dl)', min_value=0.1, max_value=25.0, value=1.7, step=0.1)
+    weight = st.number_input('Geben Sie Ihr Erythrozytenzahl ein (in Millionen/μl)', min_value=1.0, max_value=10.0, value=1.0, step=0.1)
+
+    # Every form must have a submit button.
+    submitted = st.form_submit_button("Submit")
+    
+if submitted:
+    result = calculate_bmi(height, weight)
+    st.write(f'Ihr MCH ist: {result["mch"]}')
+    st.write(f'Berechnet am: {result["timestamp"].strftime("%d.%m.%Y %H:%M:%S")}')
+    st.write(f'Kategorie: {result["category"]}')
+        
+    # --- Save BMI data ---
+    from utils.data_manager import DataManager
+    DataManager().append_record(session_state_key='data_df', record_dict=result)  # update data in session state and storage
+
+
+        
 
