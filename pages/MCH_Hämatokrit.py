@@ -1,7 +1,7 @@
 import streamlit as st
 import datetime
 import pytz
-
+from functions.mch_calculator import calculate_mch
 
 st.title("🩺 MCH Berechnung")
 
@@ -51,24 +51,8 @@ elif geschlecht == "Weiblich":
     else:
         st.write("<p style='color:red;'>❌ Der Hämatokritwert liegt NICHT im Referenzbereich für Frauen (35-47%).</p>", unsafe_allow_html=True)
 
- # --- Save BMI data ---
-    from utils.data_manager import DataManager
-    # DataManager().append_record(session_state_key='data_df', record_dict=)  # update data in session state and storage
+submitted = st.form_submit_button("Submit")
 
-
-import streamlit as st
-from functions.mch_calculator import calculate_mch
-
-st.title('🩺 MCH Berechnung')
-
-with st.form("MCH Eingabeformular"):
-    # Get user input for height and weight
-    height = st.number_input('Geben Sie Ihren Hämoglobinwert ein (in g/dl)', min_value=0.1, max_value=25.0, value=1.7, step=0.1)
-    weight = st.number_input('Geben Sie Ihr Erythrozytenzahl ein (in Millionen/μl)', min_value=1.0, max_value=10.0, value=1.0, step=0.1)
-
-    # Every form must have a submit button.
-    submitted = st.form_submit_button("Submit")
-    
 if submitted:
     result = calculate_mch(height, weight)
     st.write(f'Ihr MCH ist: {result["mch"]}')
