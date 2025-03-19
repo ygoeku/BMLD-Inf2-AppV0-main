@@ -51,18 +51,21 @@ elif geschlecht == "Weiblich":
     else:
         st.write("<p style='color:red;'>❌ Der Hämatokritwert liegt NICHT im Referenzbereich für Frauen (35-47%).</p>", unsafe_allow_html=True)
 
-submitted = st.form_submit_button("Submit")
+if hgb > 0 and erythrozyten > 0:
+    result = {
+        'mch': mch,
+        'timestamp': datetime.datetime.now(tz),
+        'category': 'Normal' if (geschlecht == 'Männlich' and 27.5 <= mch <= 33) or (geschlecht == 'Weiblich' and 26 <= mch <= 32.5) else 'Abnormal',
+        'haematokrit': haematokrit,
+        'geschlecht': geschlecht
+    }
 
-if submitted:
-    result = calculate_mch(height, weight)
-    st.write(f'Ihr MCH ist: {result["mch"]}')
-    st.write(f'Berechnet am: {result["timestamp"].strftime("%d.%m.%Y %H:%M:%S")}')
-    st.write(f'Kategorie: {result["category"]}')
-        
-    # --- Save BMI data ---
-    from utils.data_manager import DataManager
-    DataManager().append_record(session_state_key='data_df', record_dict=result)  # update data in session state and storage
+    st.write(f'**Der MCH ist:** {result["mch"]}')
+    st.write(f'**Berechnet am:** {result["timestamp"].strftime("%d.%m.%Y %H:%M:%S")}')
+    st.write(f'**Kategorie:** {result["category"]}')
 
+    # Speichern der Daten
+    DataManager().append_record(session_state_key='data_df', record_dict=result)
 
         
 
