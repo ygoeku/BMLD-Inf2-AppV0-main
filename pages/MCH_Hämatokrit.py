@@ -53,9 +53,7 @@ elif geschlecht == "Weiblich":
 
  # --- Save BMI data ---
     from utils.data_manager import DataManager
-    DataManager().append_record(session_state_key='data_df', record_dict=
-                                
-    )  # update data in session state and storage
+    # DataManager().append_record(session_state_key='data_df', record_dict=)  # update data in session state and storage
 
 
 
