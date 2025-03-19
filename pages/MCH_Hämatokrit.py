@@ -64,7 +64,7 @@ if hgb > 0 and erythrozyten > 0:
     st.write(f'**Berechnet am:** {result["timestamp"].strftime("%d.%m.%Y %H:%M:%S")}')
     st.write(f'**Kategorie:** {result["category"]}')
 
-    # Speichern der Daten
+    from utils.data_manager import DataManager
     DataManager().append_record(session_state_key='data_df', record_dict=result)
 
         
