@@ -58,7 +58,7 @@ if hgb > 0 and erythrozyten > 0:
     st.write(f'**Kategorie:** {result_dict["category"]}')
 
     from utils.data_manager import DataManager
-    DataManager().append_record(session_state_key='data_df', record_dict=result)
+    DataManager().append_record(session_state_key='data_df', record_dict=result_dict)
 
         
 
